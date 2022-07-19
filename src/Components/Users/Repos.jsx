@@ -11,7 +11,10 @@ function Repos({ repos }) {
       </div>
       {repos.map((repo) => {
         return (
-          <div className='card round-md mb-2 bg-gray-800 hover:bg-gray-900'>
+          <div
+            key={repo.id}
+            className='card round-md mb-2 bg-gray-800 hover:bg-gray-900'
+          >
             <div className='card-body'>
               <h3 className='text-xl mb-2 font-semibold'>
                 <a href={repo.html_url} target='_blank' rel='noreferrer'>

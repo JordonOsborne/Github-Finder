@@ -8,7 +8,7 @@ export const GitHubProvider = ({ children }) => {
   const initialState = {
     users: [],
     user: {},
-    isLoading: false,
+    isLoading: true,
     searchFor: "",
     results: 0,
     page: 1,
