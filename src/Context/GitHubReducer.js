@@ -23,7 +23,13 @@ const GitHubReducer = (state, action) => {
         user: action.info,
         isLoading: false,
       }
-    case "USERS_PAGINATION":
+    case "SET_REPOS":
+      return {
+        ...state,
+        repos: action.info,
+        isLoading: false,
+      }
+    case "SET_PAGE":
       return {
         ...state,
         page: action.page,

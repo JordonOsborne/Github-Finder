@@ -1,10 +1,29 @@
 import { useContext } from "react"
 import GitHubAPI from "../../Context/GitHubAPI"
+import { searchUsers } from "../../Context/GitHubActions"
 function Pagination() {
-  const { results, page, changePage } = useContext(GitHubAPI)
+  const { results, page, search, dispatch } = useContext(GitHubAPI)
   const pageCount = Math.ceil(results / 50)
-  const nextPage = () => changePage(page + 1)
-  const previousPage = () => changePage(page - 1)
+  const nextPage = async () => {
+    dispatch({ type: "SET_LOADING" })
+    const data = await searchUsers(search, page + 1)
+    dispatch({ type: "SET_PAGE", page: page + 1 })
+    dispatch({
+      type: "GET_USERS",
+      users: data.items,
+      results: data.total_count,
+    })
+  }
+  const previousPage = async () => {
+    dispatch({ type: "SET_LOADING" })
+    const data = await searchUsers(search, page - 1)
+    dispatch({ type: "SET_PAGE", page: page - 1 })
+    dispatch({
+      type: "GET_USERS",
+      users: data.items,
+      results: data.total_count,
+    })
+  }
   return (
     <div className='btn-group'>
       <button

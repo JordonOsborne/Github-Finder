@@ -1,13 +1,12 @@
 import PropTypes from "prop-types"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import GitHubAPI from "../../Context/GitHubAPI"
+import { getUser } from "../../Context/GitHubActions"
 function UserCard({ login }) {
-  const { fetchUser } = useContext(GitHubAPI)
   const [info, setInfo] = useState({})
 
   useEffect(() => {
-    fetchUser(login).then((data) => setInfo(data))
+    getUser(login).then((data) => setInfo(data))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
